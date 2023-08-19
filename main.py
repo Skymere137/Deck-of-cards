@@ -33,3 +33,43 @@ class Deck:
 
     def __repr__(self):
         return self
+    
+    # Define a method for a game of Black Jack
+    def black_jack():
+        while True:
+            counter = 0
+            deck = Deck()
+            deck.shuffle()
+
+    # Deal two cards to the player and the dealer
+            player_cards = {"card1": deck.deal_card(), "card2": deck.deal_card()}
+            dealer_cards = {"card1": deck.deal_card(), "card2": deck.deal_card()}
+
+    # Let player see his/her own cards but not dealer's
+            print("Your Cards: ")
+            for card in player_cards.values():
+                
+                print(f"{card.rank} of {card.suit}")
+                
+    # Set up a loop that gives the option to hit or stay     
+            while True:
+                counter += 1
+                res = input("Hit or stay? \n> hit \n> stay \n> ")
+                if res == "hit":
+                    player_cards[f"card{counter}"] = deck.deal_card()
+                    print(f"Your new card: {player_cards[f'card{counter}'].rank} of {player_cards[f'card{counter}'].suit}")
+                else: 
+                    break
+
+            print("Dealer's Cards: ")
+            for card in dealer_cards.values():
+                
+                print(f"{card.rank} of {card.suit}")
+
+            
+            inpt = input("Keep playing? \n> yes \n> no \n> ")
+            if inpt == "yes":
+                continue
+            elif inpt == "no":
+                break
+            else: print("Sorry I didn't understand that!")
