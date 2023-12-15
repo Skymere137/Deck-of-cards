@@ -11,6 +11,7 @@ class Card:
 
     def __str__(self):
         return f"{self.rank} of {self.suit}"
+    
 # Create the deck of cards by giving each card a rank and suit
 class Deck:
     def __init__(self):
@@ -33,9 +34,9 @@ class Deck:
 
     def __repr__(self):
         return self
-    
+
     # Define a method for a game of Black Jack
-    def black_jack():
+    def black_jack(self):
         while True:
             counter = 0
             deck = Deck()
@@ -73,3 +74,32 @@ class Deck:
             elif inpt == "no":
                 break
             else: print("Sorry I didn't understand that!")
+
+
+class GameTable(Deck):
+    def __init__(self, num_of_players):
+        self.players = {"Player 1": [], "Player 2": [], "Player 3": [], "Player 4": [], "Player 5": [], "Player 6": [], "Player 7": [], "Player 8": []}
+        self.active_players = {}
+        self.num_of_players = num_of_players
+        self.deck = Deck()
+
+    def deal_hand(self, num_of_cards):
+        new_hand = []
+        for card in range(0, num_of_cards):
+            new_card = self.deck.deal_card()
+            new_hand.append(new_card.__str__())
+        return new_hand
+    
+    def initial_deal(self, num_of_cards):
+        for num in range(1, self.num_of_players + 1):
+            player = self.players[f"Player {num}"]
+            player = self.deal_hand(num_of_cards)
+            self.active_players[f"Player {num}"] = player
+        return self.active_players
+
+
+deck = Deck()
+game = GameTable(6)
+game.deck.shuffle()
+game.initial_deal(4)
+print(game.active_players["Player 2"])
